@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// Student Grade Calculator
+
+class Student {
+    constructor(id, name, marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+        this.total = this.calculateTotal();
+        this.percentage = this.calculatePercentage();
+        this.grade = this.calculateGrade();
+    }
+
+    calculateTotal() {
+        return this.marks.reduce((sum, mark) => sum + mark, 0);
+    }
+
+    calculatePercentage() {
+        return this.total / this.marks.length;
+    }
+
+    calculateGrade() {
+        if (this.percentage > 90) {
+            return 'A';
+        } else if (this.percentage > 80 && this.percentage <= 90) {
+            return 'B';
+        } else if (this.percentage > 70 && this.percentage <= 80) {
+            return 'C';
+        } else if (this.percentage > 60 && this.percentage <= 70) {
+            return 'D';
+        } else if (this.percentage > 50 && this.percentage <= 60) {
+            return 'E';
+        } else {
+            return 'Fail';
+        }
+    }
+
+    displayDetails() {
+        console.log(`Student ID: ${this.id}`);
+        console.log(`Name: ${this.name}`);
+        console.log(`Total Marks: ${this.total}`);
+        console.log(`Percentage: ${this.percentage.toFixed(2)}%`);
+        console.log(`Grade: ${this.grade}`);
+    }
+}
+
+// Example Usage
+const student1 = new Student(101, 'keerthana', [85, 90, 78, 88, 76]);
+student1.displayDetails();
+
+// HTML Integration
+const studentDetails = document.createElement('div');
+studentDetails.innerHTML = `
+    <h2>Student Details</h2>
+    <p><strong>Student ID:</strong> ${student1.id}</p>
+    <p><strong>Name:</strong> ${student1.name}</p>
+    <p><strong>Total Marks:</strong> ${student1.total}</p>
+    <p><strong>Percentage:</strong> ${student1.percentage.toFixed(2)}%</p>
+    <p><strong>Grade:</strong> ${student1.grade}</p>
+`;
+document.body.appendChild(studentDetails);
+</script>
+</body>
+</html>
